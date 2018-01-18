@@ -1,0 +1,7 @@
+<app-product *ngFor="let p of products" 
+             [name]="p.name"
+             [description]="p.description"
+             [category]="p.category"
+             [ingredients]="p.ingredients"
+             [equivalents]="p.equivalents"
+             (buy)="onBuy($event)"></app-product>

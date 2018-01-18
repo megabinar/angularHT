@@ -1,0 +1,23 @@
+.btn-buy {
+    background: darkred;
+    color: white;
+    font-size: 16px;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 0.5em;
+}
+
+label {
+    font-weight: bold;
+    display: inline;
+    margin-right: 30px;
+}
+
+:host() {
+    border: solid 1px gray;
+    margin: 1px;
+}
+
+:host()>div {
+    padding: 5px;
+}
