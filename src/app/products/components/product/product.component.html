@@ -1,0 +1,36 @@
+<div>
+  <label>Name</label>
+  <span>{{product?.name}}</span>
+</div>
+<div>
+  <label>Description</label>
+  <span>{{product?.description}}</span>
+</div>
+<div>
+  <label>spanrice</label>
+  <span>{{product?.price}}</span>
+</div>
+<div>
+  <label>Category</label>
+  <span>{{product?.category}}</span>
+</div>
+<div>
+  <label>Is available</label>
+  <span #available>{{product?.isAvailable ? 'available' : 'sold out'}}</span>
+</div>
+<br/>
+
+<div>
+  <label>Ingredients</label>
+  <span *ngFor="let i of product?.ingredients">{{i}}</span>
+</div>
+<br/>
+
+<div>
+  <label>Equivalents</label>
+  <span *ngFor="let e of product?.equivalents">{{e}}</span>
+</div>
+
+<button class="btn-buy" 
+        [ngClass]="{'not-available' : !product.isAvailable}"
+        (click)="buy.emit()">Buy</button>

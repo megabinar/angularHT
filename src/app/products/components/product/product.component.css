@@ -21,3 +21,7 @@ label {
 :host()>div {
     padding: 5px;
 }
+
+.not-available {
+    background: grey;
+}

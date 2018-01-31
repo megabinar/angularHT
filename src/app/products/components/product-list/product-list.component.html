@@ -1,0 +1,3 @@
+<app-product *ngFor="let p of products" 
+             [product]="p"
+             (buy)="onBuy(p)"></app-product>

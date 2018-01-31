@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Product } from './product';
-import { Category } from './category';
+import { ProductItem, Category } from '../models/product';
 
 @Injectable()
 export class ProductService {
 
   constructor() { }
 
-  getAll(): Product[] {
+  getAll(): ProductItem[] {
     return [{
+      id: 1,
       name: 'Product1',
       description: 'description 1',
       category: Category.Fishing,
@@ -18,6 +18,7 @@ export class ProductService {
       equivalents: [' One']
     },
     {
+      id: 2,
       name: 'Product2',
       description: 'description 2',
       category: Category.Fishing,

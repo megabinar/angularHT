@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Product } from '../product';
-import { ProductService } from '../product.service';
-import { CartService } from '../cart.service';
+import { ProductItem } from '../../models';
+import { ProductService } from '../../services';
+import { CartService } from '../../../cart';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['../../styles.fix.css', './product-list.component.css']
+  styleUrls: ['../../../../styles.fix.css', './product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products: Product[];
+  products: ProductItem[];
 
   constructor(
     private productService: ProductService,
@@ -20,8 +20,8 @@ export class ProductListComponent implements OnInit {
     this.products = this.productService.getAll();
   }
 
-  onBuy(name: string) {
-    console.log('bought ', name);
-    this.cartService.addToCart(name);
+  onBuy(p: ProductItem) {
+    console.log('bought ', p);
+    this.cartService.addToCart(p.name, p.price);
   }
 }

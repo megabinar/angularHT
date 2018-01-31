@@ -1,0 +1,13 @@
+<!-- <div class="cart-list" *ngIf="isCartVisible; else empty"> -->
+<div class="cart-list" *ngIf="(isCartVisible$ | async); else empty">
+  <!-- баг исчез волшебным образом -->
+  Your cart: {{totalCount$ | async}} item(s) ${{totalCost$ | async}}
+
+  <!-- <div *ngFor="let item of cartItems"> -->
+  <div *ngFor="let item of (cartItems$ | async)">
+    <label>{{item.name}}</label>
+    <button (click)="onRemove(item.id)">X</button>
+  </div>
+</div>
+
+<ng-template #empty>Your cart is empty</ng-template>

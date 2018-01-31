@@ -1,0 +1,7 @@
+.cart-list {
+    border: solid 2px gray;
+}
+
+:host.awesome {
+    background: darkgrey;
+}

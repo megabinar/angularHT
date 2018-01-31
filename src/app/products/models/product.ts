@@ -1,6 +1,11 @@
-import { Category } from './category';
 
-export interface Product {
+export enum Category {
+    Fishing,
+    Weapon
+}
+
+export interface ProductItem {
+    id: number;
     name: string;
     description: string;
     price: number;
