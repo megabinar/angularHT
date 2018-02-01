@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - add/remove products from/to cart
 
 ## What used where (to mark home task as done)
-Split in modules CartModule, ProductsModule with proper structure
-@HostBinding/@HostListener in CartComponent
-@Input/@Output/@ViewChild/AfterViewInit/NgClass/Renderer2 in ProductComponent
-@HostListener('wheel') in AppComponent for fun.
+⋅⋅* Split in modules CartModule, ProductsModule with proper structure
+⋅⋅* @HostBinding/@HostListener in CartComponent
+⋅⋅* @Input/@Output/@ViewChild/AfterViewInit/NgClass/Renderer2 in ProductComponent
+⋅⋅* @HostListener('wheel') in AppComponent for fun.
