@@ -1,3 +1,3 @@
-<app-product *ngFor="let p of products" 
+<app-product *ngFor="let p of products | orderBy:'id':false" 
              [product]="p"
              (buy)="onBuy(p)"></app-product>

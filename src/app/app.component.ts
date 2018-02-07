@@ -13,6 +13,7 @@ import { CONST_TOKEN, ConfigOptionsService } from './services/index';
 export class AppComponent {
   metadata = 'empty';
   title = 'Shop';
+  now = Date.now();
 
   constructor(
     @Optional() @Inject(GEN_TOKEN) private gen: GeneratorService,

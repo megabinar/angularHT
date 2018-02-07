@@ -5,6 +5,7 @@ import { ProductService } from './services';
 import { ProductComponent, ProductListComponent } from './components';
 
 import { CartModule } from '../cart';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 @NgModule({
   imports: [
@@ -12,7 +13,7 @@ import { CartModule } from '../cart';
     // CartModule //TODO Наверное подключается в appModule потому что, не совсем понял
   ],
   exports: [ProductListComponent],
-  declarations: [ProductComponent, ProductListComponent],
+  declarations: [ProductComponent, ProductListComponent, OrderByPipe],
   providers: [ProductService]
 })
 export class ProductsModule { }

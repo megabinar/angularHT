@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { ConstantsService, CONST_TOKEN } from './services/constants.service';
 import { GeneratorService, GEN_TOKEN } from './services/generator.service';
 import { ClickToFillDirective } from './directives/click-to-fill.directive';
-import { VisibleScrollComponent } from './components/visible-scroll/visible-scroll.component';
+import { VisibleScrollComponent } from './components';
 
 const value = new ConstantsService().getAll();
 

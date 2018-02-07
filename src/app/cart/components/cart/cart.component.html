@@ -1,11 +1,7 @@
-<!-- <div class="cart-list" *ngIf="isCartVisible; else empty"> -->
 <div class="cart-list" *ngIf="(isCartVisible$ | async); else empty">
-  <!-- баг исчез волшебным образом -->
-  Your cart: {{totalCount$ | async}} item(s) ${{totalCost$ | async}}
-
-  <!-- <div *ngFor="let item of cartItems"> -->
+  Your cart: {{totalCount$ | async }} item(s) ${{totalCost$ | async | currency}}
   <div *ngFor="let item of (cartItems$ | async)">
-    <label>{{item.name}}</label>
+    <label>{{item.name | uppercase}}</label>
     <button (click)="onRemove(item.pid)">X</button>
   </div>
 </div>
