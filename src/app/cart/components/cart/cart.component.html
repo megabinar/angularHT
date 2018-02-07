@@ -6,7 +6,7 @@
   <!-- <div *ngFor="let item of cartItems"> -->
   <div *ngFor="let item of (cartItems$ | async)">
     <label>{{item.name}}</label>
-    <button (click)="onRemove(item.id)">X</button>
+    <button (click)="onRemove(item.pid)">X</button>
   </div>
 </div>
 

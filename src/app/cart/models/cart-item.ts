@@ -1,5 +1,6 @@
 export interface CartItem {
-    id: number;
+    pid: number;
     name: string;
     price: number;
+    count: number;
 }

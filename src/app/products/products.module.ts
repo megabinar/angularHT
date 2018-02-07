@@ -9,7 +9,7 @@ import { CartModule } from '../cart';
 @NgModule({
   imports: [
     CommonModule,
-    CartModule
+    // CartModule //TODO Наверное подключается в appModule потому что, не совсем понял
   ],
   exports: [ProductListComponent],
   declarations: [ProductComponent, ProductListComponent],

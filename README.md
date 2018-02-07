@@ -7,7 +7,25 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - add/remove products from/to cart
 
 ## What used where (to mark home task as done)
-* Split in modules CartModule, ProductsModule with proper structure
-* @HostBinding/@HostListener in CartComponent
-* @Input/@Output/@ViewChild/AfterViewInit/NgClass/Renderer2 in ProductComponent
-* @HostListener('wheel') in AppComponent for fun.
+* CartService modified according to requirements
+* Added LocalStorageService
+* Added ConfigOptionsService (using LocalStorageService)
+* Added ConstantsService (registered using token and useValue)
+* Added GeneratorService (registered using token and factory)
+* Services injected as Optional
+* appClickToFill directive applied to root and changes color of target using Renderer2
+* scroll is visible
+
+Q:
+```javascript
+@NgModule({
+  imports: [
+    CommonModule,
+    // CartModule //TODO Наверное подключается в appModule потому что, не совсем понял
+  ],
+  exports: [ProductListComponent],
+  declarations: [ProductComponent, ProductListComponent],
+  providers: [ProductService]
+})
+export class ProductsModule { }
+```

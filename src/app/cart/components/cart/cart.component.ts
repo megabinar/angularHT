@@ -25,12 +25,10 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.cartItems$ = this.cartService.cartItems$;
     this.totalCost$ = this.cartService.totalCost$;
+    this.totalCount$ = this.cartService.totalCount$;
 
     this.isCartVisible$ = this.cartItems$
       .map(p => !!p.length);
-
-    this.totalCount$ = this.cartItems$
-      .map(p => p.length);
   }
 
   onRemove(id: number) {
