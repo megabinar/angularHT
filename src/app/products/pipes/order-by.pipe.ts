@@ -11,11 +11,11 @@ export class OrderByPipe implements PipeTransform {
     });
   }
 
-  asc(x, y) {
+  private asc(x, y) {
     return x < y ? 1 : -1;
   }
 
-  desc(x, y) {
+  private desc(x, y) {
     return x > y ? 1 : -1;
   }
 }
