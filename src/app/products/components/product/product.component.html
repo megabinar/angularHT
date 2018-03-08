@@ -1,6 +1,7 @@
 <div>
-  <label>Name</label>
+  <label (click)="goDetail.emit()">Name</label>
   <span>{{product?.name}}</span>
+  <button (click)="goDetail.emit()">Go</button>
 </div>
 <div>
   <label>Description</label>
@@ -20,7 +21,7 @@
 </div>
 <br/>
 
-<div>
+<!-- <div>
   <label>Ingredients</label>
   <span *ngFor="let i of product?.ingredients">{{i}}</span>
 </div>
@@ -29,8 +30,6 @@
 <div>
   <label>Equivalents</label>
   <span *ngFor="let e of product?.equivalents">{{e}}</span>
-</div>
+</div> -->
 
-<button class="btn-buy" 
-        [ngClass]="{'not-available' : !product.isAvailable}"
-        (click)="buy.emit()">Buy</button>
+<button class="btn-buy" [ngClass]="{'not-available' : !product?.isAvailable}" (click)="buy.emit()">Buy</button>

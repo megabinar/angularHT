@@ -1,4 +1,4 @@
-<div [appClickToFill]>
+<div appClickToFill>
   <div style="text-align:center">
     <h1>
       Welcome to {{ title }}!
@@ -10,8 +10,22 @@
       Now {{ now | date:'medium' }}
     </h5>
   </div>
-  <app-cart></app-cart>
-  <app-product-list></app-product-list>
+<ul>
+  <li routerLinkActive="active-link" 
+      [routerLinkActiveOptions]="{exact: true}"
+      routerLink="/products">Products</li>
+  <li routerLinkActive="active-link" 
+      [routerLinkActiveOptions]="{exact: true}"
+      routerLink="/cart">Cart</li>
+  <li routerLinkActive="active-link" 
+      [routerLinkActiveOptions]="{exact: true}"
+      routerLink="/order">Order</li>
+  <li routerLinkActive="active-link"
+      routerLink="/admin">Admin</li>
+</ul>
+
+  <router-outlet></router-outlet>
 
   <app-visible-scroll></app-visible-scroll>
 </div>
+

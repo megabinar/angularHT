@@ -12,6 +12,6 @@ export class VisibleScrollComponent {
   showScroll$ = this.subj.asObservable().switchMap(s => s);
 
   @HostListener('document:wheel') wheelListener() {
-    this.subj.next(Observable.of(true).concat(Observable.of(false).delay(1000)));
+    this.subj.next(Observable.of(true).concat(Observable.of(false).delay(250)));
   }
 }

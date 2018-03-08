@@ -4,16 +4,25 @@ import { CommonModule } from '@angular/common';
 import { ProductService } from './services';
 import { ProductComponent, ProductListComponent } from './components';
 
-import { CartModule } from '../cart';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { ProductsRoutingModule } from './products.routing.module';
+import { CartModule } from '../cart';
+import { ProductCartComponent } from './components/product-cart/product-cart.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    // CartModule //TODO Наверное подключается в appModule потому что, не совсем понял
+    ProductsRoutingModule,
+    CartModule
   ],
-  exports: [ProductListComponent],
-  declarations: [ProductComponent, ProductListComponent, OrderByPipe],
-  providers: [ProductService]
+  declarations: [ProductComponent, ProductListComponent, OrderByPipe, ProductCartComponent],
+  providers: []
 })
-export class ProductsModule { }
+export class ProductsModule {
+  static forRoot() {
+    return {
+      ngModule: ProductsModule,
+      providers: [ProductService]
+    };
+  }
+}

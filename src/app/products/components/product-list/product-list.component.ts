@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ProductItem } from '../../models';
 import { ProductService } from '../../services';
@@ -14,7 +15,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    private router: Router) { }
 
   ngOnInit() {
     this.products = this.productService.getAll();
@@ -23,5 +25,10 @@ export class ProductListComponent implements OnInit {
   onBuy(p: ProductItem) {
     console.log('bought ', p);
     this.cartService.addToCart(p.id, p.name, p.price);
+  }
+
+  goDetail(p: ProductItem) {
+    this.cartService.addToCart(p.id, p.name, p.price);
+    this.router.navigate(['/products/', p.id]);
   }
 }

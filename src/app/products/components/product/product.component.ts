@@ -13,7 +13,8 @@ import { EventEmitter } from '@angular/core';
 })
 export class ProductComponent implements OnInit, AfterViewInit {
   @Input() product: ProductItem;
-  @Output() buy = new EventEmitter<any>();
+  @Output() buy = new EventEmitter<void>();
+  @Output() goDetail = new EventEmitter<void>();
   @ViewChild('available', { read: ElementRef }) availableEl: ElementRef;
 
   constructor(private renderer: Renderer2) { }
@@ -22,7 +23,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (this.product.isAvailable) {
+    if (this.product && this.product.isAvailable) {
       this.toggleClass(true);
     }
   }

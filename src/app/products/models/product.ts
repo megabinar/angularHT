@@ -7,10 +7,10 @@ export enum Category {
 export interface ProductItem {
     id: number;
     name: string;
-    description: string;
+    description?: string;
     price: number;
     category: Category;
     isAvailable: boolean;
-    ingredients: string[];
-    equivalents: string[];
+    ingredients?: string[];
+    equivalents?: string[];
 }

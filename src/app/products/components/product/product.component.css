@@ -1,3 +1,7 @@
+:host {
+    line-height: 0.7rem;
+}
+
 .btn-buy {
     background: darkred;
     color: white;
