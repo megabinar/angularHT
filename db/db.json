@@ -27,16 +27,6 @@
       "equivalents": [
         " One"
       ]
-    },
-    {
-      "id": 3,
-      "name": "test",
-      "category": 0,
-      "description": "desc",
-      "price": 1,
-      "isAvailable": true,
-      "equivalents": [],
-      "ingredients": []
     }
   ],
   "cart": [
