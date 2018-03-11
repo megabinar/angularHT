@@ -1,28 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
-import { ProductService } from './services';
-import { ProductComponent, ProductListComponent } from './components';
+import { ProductPromiseService } from './services';
+import { ProductComponent, ProductListComponent, ProductCartComponent } from './components';
 
-import { OrderByPipe } from './pipes/order-by.pipe';
 import { ProductsRoutingModule } from './products.routing.module';
+import { AppCommonModule } from '../common/app-common.module';
 import { CartModule } from '../cart';
-import { ProductCartComponent } from './components/product-cart/product-cart.component';
+// import { ProductCartComponent } from './components/product-cart/product-cart.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    AppCommonModule,
+    HttpClientModule,
     ProductsRoutingModule,
-    CartModule
+    CartModule,
   ],
-  declarations: [ProductComponent, ProductListComponent, OrderByPipe, ProductCartComponent],
+  declarations: [ProductComponent, ProductListComponent, ProductCartComponent],
   providers: []
 })
 export class ProductsModule {
   static forRoot() {
     return {
       ngModule: ProductsModule,
-      providers: [ProductService]
+      providers: [ProductPromiseService]
     };
   }
 }

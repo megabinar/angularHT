@@ -22,7 +22,9 @@ export const appComponents = [AppComponent, NotFoundComponent];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes, { enableTracing: true })
+        RouterModule.forRoot(routes, {
+        //    enableTracing: true
+        })
     ],
     providers: [AdminGuard],
     exports: [RouterModule]

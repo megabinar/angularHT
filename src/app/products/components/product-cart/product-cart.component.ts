@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterStateSnapshot, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { ProductService } from '../../services';
+import { ProductPromiseService } from '../../services';
 import { ProductItem } from '../..';
 
 @Component({
@@ -12,7 +12,7 @@ export class ProductCartComponent implements OnInit {
   product: ProductItem;
 
   constructor(
-    private productService: ProductService,
+    private productService: ProductPromiseService,
     private r: ActivatedRoute,
     private router: Router) { }
 
@@ -20,8 +20,8 @@ export class ProductCartComponent implements OnInit {
     this.router.navigate(['products', ev]);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     const id = +this.r.snapshot.params['id'];
-    this.product = this.productService.getAll().find(i => i.id === id);
+    this.product = await this.productService.get(id);
   }
 }

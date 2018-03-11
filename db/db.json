@@ -1,0 +1,51 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Product1",
+      "description": "description 1",
+      "category": 0,
+      "price": 999,
+      "isAvailable": true,
+      "ingredients": [
+        "One"
+      ],
+      "equivalents": [
+        " One"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Product2",
+      "description": "description 2",
+      "category": 1,
+      "price": 777,
+      "isAvailable": false,
+      "ingredients": [
+        "One"
+      ],
+      "equivalents": [
+        " One"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "test",
+      "category": 0,
+      "description": "desc",
+      "price": 1,
+      "isAvailable": true,
+      "equivalents": [],
+      "ingredients": []
+    }
+  ],
+  "cart": [
+    {
+      "pid": 1,
+      "name": "Product1",
+      "price": 999,
+      "count": 2,
+      "id": 1
+    }
+  ]
+}

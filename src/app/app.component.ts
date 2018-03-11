@@ -1,9 +1,7 @@
 import { Component, HostListener, Inject, Optional } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-
-import { GeneratorService, GEN_TOKEN } from './services/generator.service';
-import { CONST_TOKEN, ConfigOptionsService } from './services/index';
+import { GEN_TOKEN, GeneratorService, CONST_TOKEN, ConfigOptionsService } from './common/services';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +24,6 @@ export class AppComponent {
       this.metadata = constants;
     }
 
-    console.log('ConfigOptionsService is ', this.configService);
+    console.log('ConfigOptionsService is ', this.configService.get());
   }
 }

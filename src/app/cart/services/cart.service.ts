@@ -1,12 +1,29 @@
 
+import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { catchError, first } from 'rxjs/operators';
+
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { CartItem } from '../models';
 
 @Injectable()
 export class CartService {
+  private readonly cartUrl = 'http://localhost:3000/cart';
   private productsInCart$ = new BehaviorSubject<CartItem[]>([]);
+
+  constructor(private http: HttpClient) {
+    this.refresh();
+  }
+
+  refresh() {
+    this.http.get<CartItem[]>(this.cartUrl)
+      .pipe(
+        first(),
+        catchError(this.handleError)
+      ).subscribe(x => this.productsInCart$.next(x));
+  }
 
   get cartItems$() {
     return this.productsInCart$.asObservable();
@@ -25,33 +42,17 @@ export class CartService {
   addToCart(pid: number, name: string, price: number) {
     this.productsInCart$.first().subscribe(items => {
       const ind = items.findIndex(x => x.pid === pid);
-      let newItems: CartItem[];
+      let action;
       if (ind >= 0) {
         items[ind].count++;
-        newItems = items;
+        action = this.http.put(this.cartUrl + '/' + items[ind].id, items[ind]);
       } else {
-        newItems = [...items, { pid, name, price, count: 1 }];
+        action = this.http.post(this.cartUrl, { pid, name, price, count: 1 });
       }
 
-      this.productsInCart$.next(newItems);
-    });
-  }
-
-  increment(pid: number) {
-    this.productsInCart$.first().subscribe(items => {
-      const ind = items.findIndex(x => x.pid === pid);
-      items[ind].count++;
-      this.productsInCart$.next(items);
-    });
-  }
-
-  decrement(pid: number) {
-    this.productsInCart$.first().subscribe(items => {
-      const ind = items.findIndex(x => x.pid === pid);
-      if (ind >= 0 && items[ind].count > 1) {
-        items[ind].count--;
-        this.productsInCart$.next(items);
-      }
+      action.pipe(
+        catchError(this.handleError)
+      ).do(() => this.refresh()).subscribe();
     });
   }
 
@@ -60,19 +61,36 @@ export class CartService {
       .first()
       .subscribe(items => {
         const ind = items.findIndex(x => x.pid === pid);
-        let newItems: CartItem[];
+        let action;
         if (ind >= 0 && items[ind].count > 1) {
           items[ind].count--;
-          newItems = items;
+          action = this.http.put(this.cartUrl + '/' + items[ind].id, items[ind]);
         } else {
-          newItems = items.filter(i => i.pid !== pid);
+          action = this.http.delete(this.cartUrl + '/' + items[ind].id);
         }
 
-        this.productsInCart$.next(newItems);
+        action.pipe(
+          catchError(this.handleError)
+        ).do(() => this.refresh()).subscribe();
       });
   }
 
   clear() {
     this.productsInCart$.next([]);
   }
+
+  private handleError(err: HttpErrorResponse) {
+    let errorMessage: string;
+
+    // A client-side or network error occurred.
+    if (err.error instanceof Error) {
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      errorMessage = `Backend returned code ${err.status}, body was: ${err.error}`;
+    }
+
+    console.error(errorMessage);
+    return Observable.throw(errorMessage);
+  }
+
 }

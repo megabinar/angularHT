@@ -5,10 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class OrderByPipe implements PipeTransform {
   transform(value: any[], field: string, direction: boolean): any {
-    console.log();
-    return value.sort((x, y) => {
-      return direction ? this.asc(x[field], y[field]) : this.desc(x[field], y[field]);
-    });
+    if (value && value.length) {
+      return value.sort((x, y) => direction ? this.asc(x[field], y[field]) : this.desc(x[field], y[field]));
+    }
+
+    return value;
   }
 
   private asc(x, y) {

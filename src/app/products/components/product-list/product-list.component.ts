@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ProductItem } from '../../models';
-import { ProductService } from '../../services';
+import { ProductPromiseService } from '../../services';
 import { CartService } from '../../../cart';
 
 @Component({
@@ -11,10 +11,10 @@ import { CartService } from '../../../cart';
   styleUrls: ['../../../../styles.fix.css', './product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products: ProductItem[];
+  products: Promise<ProductItem[]>;
 
   constructor(
-    private productService: ProductService,
+    private productService: ProductPromiseService,
     private cartService: CartService,
     private router: Router) { }
 
@@ -29,6 +29,6 @@ export class ProductListComponent implements OnInit {
 
   goDetail(p: ProductItem) {
     this.cartService.addToCart(p.id, p.name, p.price);
-    this.router.navigate(['/products/', p.id]);
+    this.router.navigate(['/products', p.id]);
   }
 }

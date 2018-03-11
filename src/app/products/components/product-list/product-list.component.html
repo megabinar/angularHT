@@ -1,4 +1,4 @@
-<app-product *ngFor="let p of products | orderBy:'id':false" 
+<app-product *ngFor="let p of (products | async) | orderBy:'id':false" 
              [product]="p"
              (buy)="onBuy(p)"
              (goDetail)="goDetail(p)"></app-product>

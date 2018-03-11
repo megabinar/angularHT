@@ -1,47 +1,48 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ProductItem, Category } from '../models/product';
 
-let id = 3;
+let id_gen = 3;
 
 @Injectable()
-export class ProductService {
-  private items: ProductItem[] = [{
-    id: 1,
-    name: 'Product1',
-    description: 'description 1',
-    category: Category.Fishing,
-    price: 999,
-    isAvailable: true,
-    ingredients: ['One'],
-    equivalents: [' One']
-  },
-  {
-    id: 2,
-    name: 'Product2',
-    description: 'description 2',
-    category: Category.Fishing,
-    price: 777,
-    isAvailable: false,
-    ingredients: ['One'],
-    equivalents: [' One']
-  }];
+export class ProductPromiseService {
+  private readonly productsUrl = 'http://localhost:3000/products';
+  // private items: ProductItem[];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getAll(): ProductItem[] {
-    return this.items;
+  getAll() {
+    return this.http
+      .get<ProductItem[]>(this.productsUrl)
+      .toPromise()
+      .catch(this.handleError);
+  }
+
+  get(id: number) {
+    return this.http
+      .get<ProductItem>(this.productsUrl + '/' + id)
+      .toPromise()
+      .catch(this.handleError);
   }
 
   add(name: string) {
-    this.items.push({
-      id: id++,
+    const itm = {
+      id: id_gen++,
       name, category: Category.Fishing,
       description: 'desc',
       price: 1,
       isAvailable: true,
       equivalents: [],
       ingredients: []
-    });
+    };
 
+    return this.http.post(this.productsUrl, itm)
+      .toPromise()
+      .catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error);
+    return Promise.reject(error.message || error);
   }
 }
