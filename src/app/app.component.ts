@@ -1,7 +1,11 @@
 import { Component, HostListener, Inject, Optional } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+
 import { GEN_TOKEN, GeneratorService, CONST_TOKEN, ConfigOptionsService } from './common/services';
+import { AppState } from './+store/state';
+import { Get } from './cart/+store/actions';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +20,7 @@ export class AppComponent {
   constructor(
     @Optional() @Inject(GEN_TOKEN) private gen: GeneratorService,
     @Optional() @Inject(CONST_TOKEN) private constants: any,
-    @Optional() private configService: ConfigOptionsService) {
+    @Optional() private configService: ConfigOptionsService, store: Store<AppState>) {
     if (gen != null) {
       this.title = gen.generate();
     }
@@ -25,5 +29,7 @@ export class AppComponent {
     }
 
     console.log('ConfigOptionsService is ', this.configService.get());
+
+    store.dispatch(new Get());
   }
 }

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 import { ProductItem } from '../../models';
 import { ProductPromiseService } from '../../services';
 import { CartService } from '../../../cart';
+import { AppState } from '../../../+store/state';
+import * as cartActions from '../../../cart/+store/actions';
+import { Navigate } from '../../../+store/actions';
 
 @Component({
   selector: 'app-product-list',
@@ -16,7 +19,7 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductPromiseService,
     private cartService: CartService,
-    private router: Router) { }
+    private store: Store<AppState>) { }
 
   ngOnInit() {
     this.products = this.productService.getAll();
@@ -24,11 +27,11 @@ export class ProductListComponent implements OnInit {
 
   onBuy(p: ProductItem) {
     console.log('bought ', p);
-    this.cartService.addToCart(p.id, p.name, p.price);
+    this.store.dispatch(new cartActions.Add({ pid: p.id, name: p.name, price: p.price }));
+    // this.cartService.addToCart();
   }
 
   goDetail(p: ProductItem) {
-    this.cartService.addToCart(p.id, p.name, p.price);
-    this.router.navigate(['/products', p.id]);
+    this.store.dispatch(new Navigate({ path: '/products/' + p.id }));
   }
 }

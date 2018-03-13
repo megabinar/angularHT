@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
 import { ProductPromiseService } from '../../../products';
+import { AppState } from '../../../+store/state';
+import { Navigate } from '../../../+store/actions';
 
 
 @Component({
@@ -11,13 +15,13 @@ import { ProductPromiseService } from '../../../products';
 export class CreateProductComponent implements OnInit {
 
   constructor(private productService: ProductPromiseService,
-    private router: Router) { }
+    private store: Store<AppState>) { }
 
   ngOnInit() {
   }
 
   onCreate(i: string) {
     this.productService.add(i);
-    this.router.navigate(['admin', 'products']);
+    this.store.dispatch(new Navigate({ path: 'admin/products' }));
   }
 }

@@ -7,7 +7,7 @@ import { ProductComponent, ProductListComponent, ProductCartComponent } from './
 
 import { ProductsRoutingModule } from './products.routing.module';
 import { AppCommonModule } from '../common/app-common.module';
-import { CartModule } from '../cart';
+import { CartModule } from '../cart/cart.module';
 // import { ProductCartComponent } from './components/product-cart/product-cart.component';
 
 @NgModule({

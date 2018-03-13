@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterStateSnapshot, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { ProductPromiseService } from '../../services';
 import { ProductItem } from '../..';
+import { AppState } from '../../../+store/state';
+import { Store } from '@ngrx/store';
+import { Navigate } from '../../../+store/actions';
 
 @Component({
   selector: 'app-product-cart',
@@ -14,10 +17,10 @@ export class ProductCartComponent implements OnInit {
   constructor(
     private productService: ProductPromiseService,
     private r: ActivatedRoute,
-    private router: Router) { }
+    private store: Store<AppState>) { }
 
-  navigateDetail(ev: number) {
-    this.router.navigate(['products', ev]);
+  navigateDetail() {
+    this.store.dispatch(new Navigate({ path: '/products/' + this.product.id }));
   }
 
   async ngOnInit() {

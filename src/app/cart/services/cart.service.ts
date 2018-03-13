@@ -13,70 +13,34 @@ export class CartService {
   private readonly cartUrl = 'http://localhost:3000/cart';
   private productsInCart$ = new BehaviorSubject<CartItem[]>([]);
 
-  constructor(private http: HttpClient) {
-    this.refresh();
-  }
+  constructor(private http: HttpClient) { }
 
-  refresh() {
-    this.http.get<CartItem[]>(this.cartUrl)
+  getAll() {
+    return this.http.get<CartItem[]>(this.cartUrl)
       .pipe(
-        first(),
         catchError(this.handleError)
-      ).subscribe(x => this.productsInCart$.next(x));
+      );
   }
 
-  get cartItems$() {
-    return this.productsInCart$.asObservable();
-  }
-
-  get totalCost$() {
-    return this.cartItems$
-      .map(items => items.reduce((prev, cur) => prev + cur.price * cur.count, 0));
-  }
-
-  get totalCount$() {
-    return this.cartItems$
-      .map(items => items.reduce((prev, cur) => prev + cur.count, 0));
-  }
-
-  addToCart(pid: number, name: string, price: number) {
-    this.productsInCart$.first().subscribe(items => {
-      const ind = items.findIndex(x => x.pid === pid);
-      let action;
-      if (ind >= 0) {
-        items[ind].count++;
-        action = this.http.put(this.cartUrl + '/' + items[ind].id, items[ind]);
-      } else {
-        action = this.http.post(this.cartUrl, { pid, name, price, count: 1 });
-      }
-
-      action.pipe(
+  add(item: CartItem) {
+    return this.http.post(this.cartUrl, { ...item, count: 1 })
+      .pipe(
         catchError(this.handleError)
-      ).do(() => this.refresh()).subscribe();
-    });
+      );
   }
 
-  removeFromCart(pid: number) {
-    this.productsInCart$
-      .first()
-      .subscribe(items => {
-        const ind = items.findIndex(x => x.pid === pid);
-        let action;
-        if (ind >= 0 && items[ind].count > 1) {
-          items[ind].count--;
-          action = this.http.put(this.cartUrl + '/' + items[ind].id, items[ind]);
-        } else {
-          action = this.http.delete(this.cartUrl + '/' + items[ind].id);
-        }
-
-        action.pipe(
-          catchError(this.handleError)
-        ).do(() => this.refresh()).subscribe();
-      });
+  update(item: CartItem) {
+    return this.http.put(this.cartUrl + '/' + item.id, item)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
-  clear() {
-    this.productsInCart$.next([]);
+  remove(id: number) {
+    return this.http.delete(this.cartUrl + '/' + id)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   private handleError(err: HttpErrorResponse) {

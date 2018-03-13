@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductItem, Category } from '../models/product';
 
-let id_gen = 3;
+let id_gen = 1000;
 
 @Injectable()
 export class ProductPromiseService {
   private readonly productsUrl = 'http://localhost:3000/products';
-  // private items: ProductItem[];
 
   constructor(private http: HttpClient) { }
 
