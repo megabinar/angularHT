@@ -15,12 +15,12 @@ const elements = [
 const elementDeclarations = elements.map(e => e.type);
 
 @NgModule({
-  declarations: [...elementDeclarations],
+  declarations: elementDeclarations,
   imports: [
-    BrowserModule, ReactiveFormsModule
+    BrowserModule
   ],
   providers: [MessagingService],
-  entryComponents: [...elementDeclarations]
+  entryComponents: elementDeclarations
 })
 export class AppModule {
   constructor(private injector: Injector) {
